@@ -155,18 +155,18 @@ i = diameter.index(biggest)
 #meretek beallitasa, ha nincs akkor unable
 if materials[i] == "Euro2":
     diameter = [x / biggest * 25.75 for x in diameter]
-    scaledTo = "Scaled to 2 Euro"
+    scaledTo = "2 Euro-hoz meretezve"
 elif materials[i] == "Brass":
     diameter = [x / biggest * 24.25 for x in diameter]
-    scaledTo = "Scaled to 50 Cent"
+    scaledTo = "50 Cent-hez meretezve"
 elif materials[i] == "Euro1":
     diameter = [x / biggest * 23.25 for x in diameter]
-    scaledTo = "Scaled to 1 Euro"
+    scaledTo = "1 Euro-hoz meretezve"
 elif materials[i] == "Copper":
     diameter = [x / biggest * 21.25 for x in diameter]
-    scaledTo = "Scaled to 5 Cent"
+    scaledTo = "5 Cent-hez meretezve"
 else:
-    scaledTo = "unable to scale.."
+    scaledTo = "Nem meretezheto.."
 
 i = 0
 total = 0
@@ -174,7 +174,7 @@ while i < len(diameter):
     d = diameter[i]
     m = materials[i]
     (x, y) = coordinates[i]
-    t = "Unknown"
+    t = "Ismeretlen"
 
     #osszehasonlitas a hibahatar novelesevel
     if math.isclose(d, 25.75, abs_tol=1.25) and m == "Euro2":
@@ -217,10 +217,10 @@ output = cv2.resize(output, dim, interpolation=cv2.INTER_AREA)
 cv2.putText(output, scaledTo,
             (5, output.shape[0] - 40), cv2.FONT_HERSHEY_PLAIN,
             1.0, (0, 0, 255), lineType=cv2.LINE_AA)
-cv2.putText(output, "Coins detected: {}, EUR {:2}".format(count, total / 100),
+cv2.putText(output, "Erme felismerve: {}, EUR {:2}".format(count, total / 100),
             (5, output.shape[0] - 24), cv2.FONT_HERSHEY_PLAIN,
             1.0, (0, 0, 255), lineType=cv2.LINE_AA)
-cv2.putText(output, "Classifier mean accuracy: {}%".format(score),
+cv2.putText(output, "A vizsgalat pontossaga: {}%".format(score),
             (5, output.shape[0] - 8), cv2.FONT_HERSHEY_PLAIN,
             1.0, (0, 0, 255), lineType=cv2.LINE_AA)
 
