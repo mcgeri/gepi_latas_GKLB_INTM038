@@ -217,7 +217,7 @@ output = cv2.resize(output, dim, interpolation=cv2.INTER_AREA)
 cv2.putText(output, scaledTo,
             (5, output.shape[0] - 40), cv2.FONT_HERSHEY_PLAIN,
             1.0, (0, 0, 255), lineType=cv2.LINE_AA)
-cv2.putText(output, "Erme felismerve: {}, EUR {:2}".format(count, total / 100),
+cv2.putText(output, "Erme felismerve: {} db, EUR {:2}".format(count, total / 100),
             (5, output.shape[0] - 24), cv2.FONT_HERSHEY_PLAIN,
             1.0, (0, 0, 255), lineType=cv2.LINE_AA)
 cv2.putText(output, "A vizsgalat pontossaga: {}%".format(score),
