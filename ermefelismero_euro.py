@@ -8,22 +8,32 @@ import glob #pattern
 import cv2 #OpenCV képkezeléshez
 
 # argumentum konstruktor
+#https://docs.python.org/3/library/argparse.html
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True, help="path to image")
 args = vars(ap.parse_args())
 
+#imread kep beolvasas filebol
+#https://www.geeksforgeeks.org/python-opencv-cv2-imread-method/
 image = cv2.imread(args["image"])
 
 #keparany tartassal meretezes fix meretre
-d = 1024 / image.shape[1]
-dim = (1024, int(image.shape[0] * d))
-image = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
+#https://note.nkmk.me/en/python-opencv-pillow-image-size/
+#https://www.tutorialkart.com/opencv/python/opencv-python-resize-image/
+d = 1024 / image.shape[1] #d = 1024/ kep meretenek a magassagaval.
+dim = (1024, int(image.shape[0] * d)) # dim = 1024,szelesseg szor a d
+image = cv2.resize(image, dim, interpolation=cv2.INTER_AREA) #kep, kep merete es viszintes tengely lepteke a dim, újramintavételezés pixel terület relációval. Előnyös módszer lehet a képtizedelésre, mivel moire-mentes eredményeket ad
+# print (d)
+# print (dim)
 
 #eredeti megjelniteshez lemasolni
 output = image.copy()
 
 #szurke aranyalatosra konvertalas
+#https://www.geeksforgeeks.org/python-opencv-cv2-cvtcolor-method/
+#gepi latas problemainak megoldasa. Sz
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# cv2.imshow("Szurke kep", gray)
 
 #kontraszt javitas a fenyviszonyok kozotti kulonbsegekkel
 #clachbe belerak a kontraszt kepet a hisztorgram alkalmazasahoz
@@ -227,4 +237,5 @@ cv2.putText(output, "A vizsgalat pontossaga: {}%".format(score),
 #megjelenit es billentyure var kilepeshez
 cv2.imshow("Output", np.hstack([image, output]))
 cv2.waitKey(0)
+cv2.destroyAllWindows()
 
